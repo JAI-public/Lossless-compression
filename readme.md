@@ -1,35 +1,14 @@
-# lossless Decompress library
+# Decompression Library for Xpress (ImageCompressionMode)
 
-GOX-4th Genで対応予定のlossless compressionされた画像に対しDecompress処理を行うlibraryである。本library設計時点ではlossless画像をどのようにアプリ側でみせるか決まっていない。またDecompress処理をlibraryとして提供するのかも決まっていない。したがって、eBUS Playerで伸長画像表示できる処理のみ実装する。
+JAI's own Lossless compression algorithm reduces and fully restores image data without loss of data. As a result, the output frame rate can be increased.
 
-Ver1リリース時点では8bit画像のみ対応する。
+![ImageCompressionMode](https://github.com/JAI-public/Lossless-compression/assets/105468045/90baae2b-caf7-46b6-a7ba-5bcf37460d18)
 
+When image data is compressed by Image Compression Mode, the output format is no longer in Pixel Format's format (Mono8 or Bayer8). Therefore, the standard tools such as eBUS SDK for JAI will not display the compressed image correctly. Use Decompression Library to restore compressed image on the software you use. 
 
+**Notes**: For more information on how to use Xpress (ImageCompressionMode), see the user manual available at the JAI product page (www.jai.com).
 
-## How to use library
+## How to Use Decompression Library
 
-[libray 使い方](./docs/usage.md)
-
-## Performance
-
-25MP圧縮画像を伸長する処理時間
-
-[伸長処理測定](./docs/performance_decompress.md)  
-
-20405M=PGE nono ThreadPool関連プログラム修正後Losless伸長ThreadPool処理をした結果
-
-[ThreadPool_nono 処理測定](./docs/performance_threadpool_mono.md) 
-
-
-16205M-PGE color ThreadPool関連プログラム修正後Losless伸長ThreadPool処理をした結果
-
-[ThreadPool_color 処理測定](./docs/performance_threadpool_color.md) 
-
-画像データ転送の調査
-
-[データ転送測定](./docs/data_transfer.md)
-
-## Color camera用のライブラリー開発
-
-[プログラムの変更/修正](./docs/program_update.md) 
+See [How to Use Decompression Library](./docs/usage.md).
 
