@@ -1,12 +1,13 @@
+# Debug
 ### CompressedBufferBpp8d, CompressedLineBpp8d,CompressedBlockBpp8d
 
-上記クラスはカメラおよびPC側ライブラリのDebug用途に利用するクラスであり、クラス名にdが付与される。基本的な責務は夫々Baseとなるクラスと同じだがLogを出力する点が大きく異なる。
+The above classes are used for debugging the camera and PC-side libraries, and have "d" added to the class name. The basic responsibilities of each class are the same as those of the base class, but the main difference is that they output a log.
 
-アプリ側で`CompressedBufferBpp8d`を生成した場合にDebug用途クラスである`CompressedLineBpp8d`,`CompressedBlockBpp8d`が利用される。これらのクラスを使った場合は、伸長処理はシングルスレッドで実行され、また実行経過をログ出力するため、伸長処理に時間がかかる。またログ出力にOSSを利用している関係で、ユーザへの公開は想定していない。
+When `CompressedBufferBpp8d` is generated on the application side, the debug classes `CompressedLineBpp8d` and `CompressedBlockBpp8d` are used. When these classes are used, the decompression process is executed in a single thread and the execution progress is logged, therefore the decompression process takes time. Also, since OSS is used to output logs, it is not intended to be disclosed to users.
 
-Debug版では`lossless.conf`設定に従い、処理経過をファイルとしてログ出力を行う。また圧縮データ異常を検出した場合、処理を停止させ`std::runtime_error`が発生する。したがってログファイルを見ることで、どのあたりのデータを異常と判断したか確認可能である。
+In the debug version, the processing progress is logged to a file according to the `lossless.conf` setting. If an error is detected in the compressed data, the processing is stopped, and `std::runtime_error` is generated. Therefore, it is possible to check what data is considered abnormal by looking at the log file.
 
-以下は一例であるが、`h: 25, offset: 0x5830`の出力は25Line目、Dataオフセット 0x5830から伸長処理を行った場合に出力される。該当Lineにエラーを検出しなかった場合は`h: 26, offset: 0x5c30`のように次のLineが出力される。以下の場合26Line目の伸長においてLineHeader異常を検出したため、該当LineHeaderのデータを出力し処理を停止した結果である。
+For example, `h: 25, offset: 0x5830` is output when decompression is performed on the 25th line, data offset 0x5830. If no error is detected on that line, the next line, `h: 26, offset: 0x5c30`  is output. In the following case, a LineHeader error is detected when decompressing the 26th line, the corresponding LineHeader is output, and the process is stopped.
 
 ```
 [20220531-134627.552778000][debug] h: 25, offset: 0x5830
@@ -15,9 +16,7 @@ Debug版では`lossless.conf`設定に従い、処理経過をファイルとし
 [20220531-134633.743385000][debug] Invalid version of line header: 0
 ```
 
-
-
-実際のデータ伸長処理までステップが進んだ場合はLine毎に以下のような各BlockのHeader情報を出力する
+When proceeding to the actual data decompression, the following header information is output for each block for each line. 
 
 ```
 [20220601-165736.674895400][info] [DoDecompress] line: 823, offset from top: 0x21c18
@@ -43,11 +42,10 @@ Debug版では`lossless.conf`設定に従い、処理経過をファイルとし
 
 `[info] [DoDecompress] line: 823, offset from top: 0x21c18`
 
-これは823LineのDataを伸長している事を表す。また823LineのDataはBuffer先頭からオフセット0x21c18バイトから開始している事を意味する。
+This indicates that the line 823 data is decompressed. It also indicates that the line 823 data starts at offset 0x21c18 bytes from the top of the buffer.
 
 `[debug] block_start_bits:143, Byte: 0x11, Offset Bit: 7 quantized_bitwidth:1`
 
-これはBlockHeaderを出力している。block_start_bits:143はLine先頭から143bitの場所から該当Blockが開始してる事を表す。Byte: 0x11, Offset Bit: 7は上記block_start_bitsがLine先頭から0X11バイトの7bitの場所から始まることを意味している。ただしこのByteはLine先頭からのオフセットでありバッファ先頭からのオフセットはoffset from topを加算する必要がある事は注意が必要。
-
+This indicates that the BlockHeader is output. `block_start_bits:143` indicates that the block starts 143 bits from the top of the line.  `Byte: 0x11, Offset Bit: 7` indicates that the block_start_bits starts 0x11 bytes, 7 bits from the top of the line. However, please note that this Byte is the offset from the top of the line. The offset from the top must be added to the offset from the top of the buffer. 
 
 
