@@ -1,29 +1,30 @@
 
 
-# モジュール構成
+# Module Configuration
 
-## 圧縮仕様
+## Compression Specifications
 
 https://jaionline-my.sharepoint.com/:p:/g/personal/kta_jai_com/ERSBnMgd2_pMvAZE3PyqaJMB5P_Y6x-yFkrK4IQsC9mtNA
 
 ![image-20220427185854483](images/image-20220427185854483.png)
 
-## クラス図
+## Class Diagram
 
 ### CompressedBufferBpp8
 
-### CompressedBufferBpp8()
+#### CompressedBufferBpp8()
 
-フレームブッファ上に圧縮された8bit画像データに対して伸長処理を行うクラス。CompressedBufferBpp8コンストラクタにカメラから受信したフレームバッファのポインターをセットし、DoDecompress()メソッドに予め確保した伸長先バッファをセットする事で伸長処理を行う。 
+This class decompresses 8-bit image data compressed on a frame buffer.
 
-カメラのlosslessモードを予め判定しlossless有効な場合に実行する必要がある。
+The decompression process is performed by setting the pointer to the frame buffer received from the camera in the CompressedBufferBpp8 constructor and setting the previously allocated decompression target buffer in the DoDecompress() method.
 
-伸長処理はスレッドによる並列処理を行う。伸長スレッドはスレッドプールを作成する。生成するスレッド数Defaultは`std::thread::hardware_concurrency()`を利用して取得したコア数を利用する。下記GetInstance()の引数としてスレッド数を指定した場合は指定された数のスレッドを生成する。
+It is necessary to configure the camera's ImageCompressionMode setting in advance and execute it when Lossless is enabled.
+
+The decompression process is performed in parallel by threads. A thread pool is created for the decompression threads. The default number of threads to create is the number of cores obtained using `std::thread::hardware_concurrency()`. If the number of threads is specified as an argument to GetInstance() below, the specified number of threads will be created.
 
 https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc5b719bd37911/src/compressed_buffer_bpp8.cpp#L19
 
-スレッドプールはSingletonとして作成するためフレーム毎に実際に生成処理を行う訳ではない。
-
+Thread pools are created as Singletons, so they are not generated for each frame.
 #### ~~GetBeforeCompressionHeight()~~
 
 ~~圧縮前Heightを計算するメソッドである。圧縮された画像の場合カメラが生成するImageのHeightの値が小さくなってる。eBUS SDKのPvImageクラスで取得できるHeightは圧縮後のHeightである。~~
@@ -38,15 +39,15 @@ https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc
 
 #### DoDecompress()
 
-伸長処理を実行するメソッドである。本メソッドに伸長結果を展開するバッファをセットし実行する。本メソッドはライン毎にコンストラクタで生成したスレッドを利用して並列処理を行う。
+This method performs the decompression process, by setting a buffer to provide the decompression result to this method and execute it.  This method performs parallel processing using a thread created by the constructor for each line.
 
 ### CompressedLineBpp8
 
 #### CompressedLineBpp8()
 
-コンストラクタにフレームバッファのLine毎のスタート位置を示すポインターをセットして利用する。圧縮データをBitStream処理するためのCompressedBitStreamクラスを生成し、伸長処理はCompressedBitStreamを使って行う。
+Set and use a pointer in the constructor to indicate the start position of each line of the frame buffer. Create a CompressedBitStream class for BitStream to process compressed data, and use CompressedBitStream for decompression processing. 
 
-Line圧縮データは一定幅のBlockで構成されBlock毎に圧縮データのbit数が異なっている。BlockはBlockHeaderを持ちCompressedBlockBpp8, CompressedBlockBayerBpp8クラスでBlockHeaderに従い伸長演算を行う。CompressedBlockBayerBpp8はBayer画像用の伸長クラスだが、カメラから受信した圧縮Bayer画像を伸長した場合`BGBGBG...`のような配置とならない。伸長したデータを`BGBGBG...`のような一般的な配置に置き換える処理が追加されている。
+Line compressed data consists of blocks of fixed width, and each block has a different number of bits of compressed data. Each block has a BlockHeader, and the CompressedBlockBpp8 and CompressedBlockBayerBpp8 classes perform decompression operations according to the BlockHeader. CompressedBlockBayerBpp8 is a decompression class for Bayer images, but when a compressed Bayer image received from a camera is decompressed, it is not aligned like `BGBGBG`...  Therefore, a process has been added to replace the decompressed data with a general alignment such as `BGBGBG`...
 
 
 ```mermaid
@@ -70,9 +71,9 @@ CompressedLineBpp8 ..> CompressedBlockBayerBpp8
 
 ### CompressedBitStream
 
-バッファをBitStreamで扱うためのクラス
+Class for buffer handling in BitStream
 
-現状`CompressedBitStream`はLineに対して一つのクラスを生成する実装になっている。そのため以下のようにDecompress()を1ラインのブロック数分ループする処理になっている。これはBlock境界がByte単位ではなく、Byteに跨る仕様のためこのような設計となっている。
+Currently `CompressedBitStream` is implemented to create one class for each line. Therefore, as shown below, Decompress() is looped for the number of blocks in a line. This is because the block boundary is not in byte units, but is designed to span bytes.
 
 https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc5b719bd37911/src/compressed_line_bpp8.cpp#L43-L46
 
@@ -80,11 +81,11 @@ https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc
 
 https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc5b719bd37911/src/compressed_bitstream.hpp#L19
 
-`start_bit`から`bit_width`分のbitデータをint16に変換する処理。現状指定されたbitデータが2byteに跨る場合は対応しているが、3byte以上にまたがる処理は未対応である。現在8bitデータ以外は圧縮未サポートであるが、仮に10bit以上のPixelFormatに対しても圧縮対応する場合は3byte跨る場合の対応も必要となる。
+Process to convert bit data from `start_bit' to `bit_width' to int16.　This supports bit data spanning 2 bytes, but not data spanning 3 bytes or more. Currently, compression is only supported for 8-bit data, but if compression is to be supported for PixelFormat of 10 bits or more, it will be necessary to support the case where the data spans 3 bytes.
 
 ### CompressedBufferBpp8d, CompressedLineBpp8d,CompressedBlockBpp8d
 
-カメラ、ツールのDebug用途クラス
+Class for debugging cameras and tools
 
 [design_debug.md](design_debug.md)
 
