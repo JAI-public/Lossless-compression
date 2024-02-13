@@ -1,7 +1,8 @@
-# eBUS SDK PvBufferConverterを使った変換時間
+# Conversion time with eBUS SDK PvBufferConverter
 
-低画素数ではBeyerFilterによる差は小さい。高画素数の場合スレッド数8程度までは効果ありそう  
-**以下処理時間単位は秒**  
+At lower pixel counts, the Bayerfilter makes little difference. At higher pixel counts, it can be effective up to about 8 threads.  
+
+**Processing Time Unit: seconds**  
 
 ## SetBayerFilterSimple
 PixelFormat = BayerRG8
