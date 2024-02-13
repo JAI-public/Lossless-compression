@@ -1,13 +1,11 @@
-**環境** 　　　　Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz　32Gb<br>
-　　　　　　Windows10 Pro　21H2
-
-**確認事項**　　eBUSPLayerで画像が連続して描画されること、プログラムが落ちないこと、<br>
-　　　　　　その間にプログラムを修正してログを出力して処理時間を計測しました<br>
-**カメラ**　　　20405M PGE<br>
-**画像サイズ** 　4480x4480<br>
-**FPS**       　　 　  5.6Hz前後<br>
-**GAIN**    　　　 1
-|画像の番号 | thread_num=01 | thread_num=10 | thread_num=20
+# Performance (Monochrome Model)
+**Environment**: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz 32Gb, Windows10 Pro 21H2<br>
+**Items to Check**:　BUSPLayer should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
+**Camera**: 20405M PGE<br>
+**Image Size**: 4480x4480<br>
+**FPS**: Approx. 5.6Hz<br>
+**GAIN**: 1
+|Image# | thread_num=01 | thread_num=10 | thread_num=20
 |--|--|--|--
 | 1 |  6.89 | 21.17 | 11.63 
 | 2 |  4.87 | 11.58 | 13.60 
