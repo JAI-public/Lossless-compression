@@ -1,16 +1,16 @@
-# lossless伸長処理時間
+# Lossless Decompression Processing Time
 
-**単位=ms**
+**Unit=ms**
 ## Mono8 Width=5120, Height=5120
 
-### 実装 v0.0.3
+### Implementation v0.0.3
 <details>
 <summary>Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz </summary>
   
-### 測定日 : 2022/4/5
-### 測定Machine
+### Date Measured: 2022/4/5
+### Measurement Machine
 * CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
-* Memory : 32.0 GB
+* Memory: 32.0 GB
 
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
@@ -21,7 +21,7 @@
 |3  |161.732    |40.224   |24.763|25.166|17.110
 |3  |161.982    |44.759   |32.435|25.975|18.194
 
-v0.0.3から実際の処理に近づけるためDeCompressをループさせて測定
+Measured by looping DeCompress to get closer to the actual process since v0.0.3
   
   
 https://github.com/jai-rd/lossless_compression/releases/tag/v0.0.3  
@@ -31,10 +31,10 @@ https://github.com/jai-rd/lossless_compression/issues/21
 <details>
 <summary>AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz </summary>
   
-### 測定日 : 2022/4/5
-### 測定Machine
+### Date Measured: 2022/4/5
+### Measurement Machine
 * CPU : AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
-* Memory : 32.0 GB
+* Memory: 32.0 GB
 
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
@@ -45,15 +45,15 @@ https://github.com/jai-rd/lossless_compression/issues/21
 |3  |114.772    |35.849   |18.396|13.890|14.019
 |3  |114.440    |28.428   |21.030|14.253|15.653
 
-v0.0.3から実際の処理に近づけるためDeCompressをループさせて測定
+Measured by looping DeCompress to get closer to the actual process since v0.0.3
 </details>
 
-### 実装 v0.0.2
+### Implementation v0.0.2
 <details>
 <summary>Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz </summary>
   
-### 測定日 : 2022/4/4
-### 測定Machine
+### Date Measured: 2022/4/4
+### Measurement Machine
 * CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
 * Memory : 32.0 GB
 
@@ -71,8 +71,8 @@ https://github.com/jai-rd/lossless_compression/issues/17
 <details>
 <summary>AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz </summary>
   
-### 測定日 : 2022/4/5
-### 測定Machine
+### Date Measured: 2022/4/5
+### Measurement Machine
 * CPU : AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
 * Memory : 32.0 GB
 
@@ -83,12 +83,12 @@ https://github.com/jai-rd/lossless_compression/issues/17
 |3  |116.63    |33.97   |19.85|17.79|15.73
 </details>
 
-### 実装 v0.0.1
+### Implementation v0.0.1
 <details>
 <summary>Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz </summary>
   
-### 測定日 : 2022/4/4
-### 測定Machine
+### Date Measured: 2022/4/4
+### Measurement Machine
 * CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
 * Memory : 32.0 GB
 
@@ -103,12 +103,12 @@ https://github.com/jai-rd/lossless_compression/issues/15
 </details>
 
 
-### first実装
+### First　Implementation
 <details>
 <summary>Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz </summary>
   
-### 測定日 : 2022/4/4
-### 測定Machine
+### Date Measured: 2022/4/4
+### Measurement Machine
 * CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
 * Memory : 32.0 GB
 
@@ -118,15 +118,15 @@ https://github.com/jai-rd/lossless_compression/issues/15
 |2  |240.02    |130.94   |32.86|26.03|23.05
 |3  |238.63    |56.76   |32.49|24.86|23.75
   
-測定コードは2021/7/28同等処理
+Measurement code is 2021/7/28 Equivalent 
 </details>
 
 
 <details>
 <summary>Ryzen3700</summary>
 
-### 測定日 : 2021/7/28頃
-### 測定Machine
+### Date Measured: 2021/7/28 (Approx)
+### Measurement Machine
 * CPU : Ryzen3700
 * Memory : 32GB
 
