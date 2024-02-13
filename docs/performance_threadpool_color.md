@@ -1,15 +1,13 @@
-**環境** 　　　　Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz　32Gb<br>
-　　　　　　Windows10 Pro　21H2
-
-**確認事項**　　eBUSPLayerで画像が連続して描画されること、プログラムが落ちないこと、<br>
-　　　　　　その間にプログラムを修正してログを出力して処理時間を計測しました<br>
-**カメラ**　　　16205M-PGE<br>
-**バージョン** 　DV 5.1.0.0<br>
-**画像サイズ** 　5240x3040<br>
-**FPS**　　　　 2.9Hz前後<br>
-**GAIN**    　　　 1<br>
-**Pixel Format**  BayerRG8
-|画像の番号 | thread_num=01 | thread_num=10 | thread_num=20
+# Performance (Color Model)
+**Environment:** Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz　32Gb, Windows10 Pro　21H2<br>
+**Items to Check:**　eBUSPLayer should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
+**Camera:** 16205C-PGE<br>
+**Version:** DV 5.1.0.0<br>
+**Image Size:** 5240x3040<br>
+**FPS:**　Approx. 2.9Hz<br>
+**GAIN:**  1<br>
+**Pixel Format:** BayerRG8
+|Image# | thread_num=01 | thread_num=10 | thread_num=20
 |--|--|--|--
 | 1 | 120.12 | 118.04 | 111.25 
 | 2 | 106.42 | 114.70 | 111.66 
