@@ -1,39 +1,37 @@
-### 更新日　2023/03/10
+# Program Update
+### Last Updated:　2023/03/10
 
 
-|ファイル名 | 処理単位 | 変更点
+|File Name | Processing Unit | Changes
 |--|--|--
-|compressed_block_bayerbpp8.cpp | 画像一行の処理  | 一行の中にRGまたはGBの画像データが圧縮して入ってきます<br>伸長してBayreFileterの配列に、Rを64bit、Gを64bitの順に<br>　　　　　　または　Gを64bit、Bを64bitの順に入れなおします
-|compressed_block_bayerbpp8.hpp | ”　　　　　　  | 関数Decompressの引数を3個追加しています<br>　[引数1] value1, [引数2] value2  画面全体を　RGBで塗りつぶす場合の数値<br>　[引数3] block_num　一行中に128bit分のデータがいくつ入っているかの個数　
-|compressed_buffer_bpp8.cpp     | 画像1画面の処理 | ・Mono/Colorライブラリマージに伴い、Mono/Color判別用に<br>　CompressedBufferBpp8::DoDecompressの引数にPixcelTypeを追加。　<br>・関数compressed_line->DoDecompressに引数を1つ追加しています<br>　[引数1] h　画面の行数(画面の行数を奇数偶数で分けるため)
-|compressed_buffer_bpp8d.cpp　　| "　             |  ・Mono/Colorライブラリマージに伴い、Mono/Color判別用に<br>　CompressedBufferBpp8::DoDecompressの引数にPixcelTypeを追加。<br>・関数compressed_line->DoDecompressに引数を1つ追加しています<br>　[引数1] h　画面の行数(画面の行数を奇数偶数で分けるため)
-|compressed_line_bpp8.cpp　　　 | 画像一行の処理  | 非圧縮データについて<br>   行番号が奇数/偶数か判断してデータをそのままBayerFilterに再配置します <br>圧縮データについて<br>   行番号が奇数/偶数か判断してcompressed_block_bayerbpp8に渡します　
-|compressed_line_bpp8.hpp　　　 | ”　　　　　　 | 関数DoDecompressの引数を1つ追加しています<br>　[引数1] h_line　画面の行番号
-|compressed_line_bpp8d.cpp      | 画像一行の処理  | 関数DoDecompressに引数を追加しています　
-|compressed_line_bpp8d.hpp      | "　　　　　　　 | 関数DoDecompressに引数を追加しています　
+|compressed_block_bayerbpp8.cpp | Processing a single image line  | Single line contains compressed RG or GB image data. Decompress and re-align the BayerFilter array with R in 64-bit, G in 64-bit order, or G in 64-bit, and B in 64-bit order.
+|compressed_block_bayerbpp8.hpp | ”　　　　　　  | Added three arguments to the DeCompress function. <br>[Argument1] value1, [Argument2] value2: Numeric values when filling the whole screen with RGB <br>[Argument3]: The number of 128 bit data in one block_num line 
+|compressed_buffer_bpp8.cpp     | Processing one image | ・Added the PixelType argument to CompressedBufferBpp8::DoDeCompress for mono/color to distinguish due to the mono/color library merge. <br>・Added an argument to the compressed_line->DoDecompress <br>・[Argument1] Number of lines of h image (to separate the number of lines of the image by odd and even numbers)
+|compressed_buffer_bpp8d.cpp　　| "　             |  ・Added the PixelType argument to CompressedBufferBpp8::DoDeCompress for mono/color to distinguish due to the mono/color library merge. <br>・Added an argument to the compressed_line->DoDecompress <br>・[Argument1] Number of lines of h image (to separate the number of lines of the image by odd and even numbers)
+|compressed_line_bpp8.cpp　　　 | Processing a single image line  | Uncompressed Data: Re-assign the data to the BayerFilter as is, after determining whether the line umber is odd or even. <br>Compressed Data:  Determines whether the line number is odd or even and passes it to compressed_block_bayerbpp8　
+|compressed_line_bpp8.hpp　　　 | ”　　　　　　 | Added an argument to the DoDecompress function.<br> h_line: line number of the image
+|compressed_line_bpp8d.cpp      | Processing a single image line  | Added an argument to the DoDecompress function.　
+|compressed_line_bpp8d.hpp      | "　　　　　　　 | Added an argument to the DoDecompress function.
 
 ~~branch名: develop_color に更新したプログラムが記載されています<br>~~
 ~~注意点： 非圧縮画像はcolorとmonoをプログラム内部で切り分けることができていません<br>~~
 ~~&emsp; 実行ファイルをcolor用とmono用と用意しましたので使い分けて下さい<br>~~
 
-Mono/Colorライブラリマージ版を組み込んだeBUSplayerは以下に配置。<br>
+eBUSplayer which includes the Mono/Color library merge is placed below.<br>
 \\\jai-yoko-fil01\GROUP\Development\_Public\800_Users\uehara\01_lossless\01_exe <br>
 
-※2023/03/10時点<br>
-　現状eBUSplayer for lossless(Xpress)はビルド時のeBUS SDKのバージョンと、<br>
-　ローカルに入っているeBUS SDKのバージョンを揃える必要があるが、<br>
-　Pleaoraの方で次期eBus Player for JAI にライブラリ取り込んでもらえるようになれば、この手間は無くなる見込み。
+※As of 2023/03/10<br>
+Currently, eBUS Player for Xpress requires eBUS SDK for JAI version installed on your PC, and the eBUS Player for Xpress version and the SDK version must match. However, when Pleaora is able to import the library into the next version of eBus SDK for JAI, this issue will be resolved.
 
-【補足】<br>
-以下、Mono/Colorライブラリ別れていた時のバイナリの場所。
-|ファイル名 | 画像 | 備考
+【Supplement】<br>
+Below is the location of the binary when the Mono/Color library was split.
+|File Name | Image | Remarks
 |--|--|--
-|20220906_color_No_Debug\eBUSPlayer.exe|color用|logの出力なし
-|20220901_color\eBUSPlayer.exe|color用|logの出力あり
-|20220804_No_Debug\eBUSPlayer.exe|mono用|logの出力なし
-|20220629\eBUSPlayer.exe|mono用|logの出力あり
-
-eBUSPlayeのversion: 6.2.4.5552<br>
-ファイルのpath P:\Development\_Public\800_Users\nasu\eBUS Player lossless for Debug\
+|20220906_color_No_Debug\eBUSPlayer.exe|For color models|No log output
+|20220901_color\eBUSPlayer.exe|For color models|Output logs
+|20220804_No_Debug\eBUSPlayer.exe|For monochrome models|No log output
+|20220629\eBUSPlayer.exe|For monochrome models|Output logs
+eBUSPlaye version: 6.2.4.5552<br>
+File path P:\Development\_Public\800_Users\nasu\eBUS Player lossless for Debug\
 
 
