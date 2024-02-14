@@ -42,10 +42,10 @@ When proceeding to the actual data decompression, the following header informati
 
 `[info] [DoDecompress] line: 823, offset from top: 0x21c18`
 
-This indicates that the line 823 data is decompressed. It also indicates that the line 823 data starts at offset 0x21c18 bytes from the top of the buffer.
+This indicates that the line 823 data is decompressed. It also indicates that the line 823 data starts at 0x21c18 bytes, which is the offset from the top of the buffer.
 
 `[debug] block_start_bits:143, Byte: 0x11, Offset Bit: 7 quantized_bitwidth:1`
 
-This indicates that the BlockHeader is output. `block_start_bits:143` indicates that the block starts 143 bits from the top of the line.  `Byte: 0x11, Offset Bit: 7` indicates that the block_start_bits starts 0x11 bytes, 7 bits from the top of the line. However, please note that this Byte is the offset from the top of the line. The offset from the top must be added to the offset from the top of the buffer. 
+This indicates that the BlockHeader is output. `block_start_bits:143` indicates that the block starts 143 bits from the top of the line.  `Byte: 0x11, Offset Bit: 7` indicates that the block_start_bits starts 0x11 bytes, 7 bits from the top of the line. However, please note that this Byte is the offset from the top of the line, not the buffer. "Offset from top" must be added to this Byte for the offset from the top of the buffer.
 
 
