@@ -1,6 +1,6 @@
 # Performance (Monochrome Model)
 **Environment**: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz 32Gb, Windows10 Pro 21H2<br>
-**Items to Check**:　BUSPLayer should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
+**Items to Check**:　BUS Player should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
 **Camera**: 20405M PGE<br>
 **Image Size**: 4480x4480<br>
 **FPS**: Approx. 5.6Hz<br>
