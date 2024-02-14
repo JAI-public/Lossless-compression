@@ -1,6 +1,6 @@
 # Performance (Color Model)
 **Environment:** Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz　32Gb, Windows10 Pro　21H2<br>
-**Items to Check:**　eBUSPLayer should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
+**Items to Check:**　eBUS Player should draw images continuously and the program should not crash. In the meantime, modified the program to output logs and measured the processing time.<br>
 **Camera:** 16205C-PGE<br>
 **Version:** DV 5.1.0.0<br>
 **Image Size:** 5240x3040<br>
