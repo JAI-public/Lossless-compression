@@ -13,25 +13,3 @@
 |compressed_line_bpp8d.cpp      | Processing a single image line  | Added an argument to the DoDecompress function.　
 |compressed_line_bpp8d.hpp      | "　　　　　　　 | Added an argument to the DoDecompress function.
 
-~~branch名: develop_color に更新したプログラムが記載されています<br>~~
-~~注意点： 非圧縮画像はcolorとmonoをプログラム内部で切り分けることができていません<br>~~
-~~&emsp; 実行ファイルをcolor用とmono用と用意しましたので使い分けて下さい<br>~~
-
-eBUSplayer which includes the Mono/Color library merge is placed below.<br>
-\\\jai-yoko-fil01\GROUP\Development\_Public\800_Users\uehara\01_lossless\01_exe <br>
-
-※As of 2023/03/10<br>
-Currently, eBUS Player for Xpress requires eBUS SDK for JAI version installed on your PC, and the eBUS Player for Xpress version and the SDK version must match. However, when Pleaora is able to import the library into the next version of eBus SDK for JAI, this issue will be resolved.
-
-【Supplement】<br>
-Below is the location of the binary when the Mono/Color library was split.
-|File Name | Image | Remarks
-|--|--|--
-|20220906_color_No_Debug\eBUSPlayer.exe|For color models|No log output
-|20220901_color\eBUSPlayer.exe|For color models|Output logs
-|20220804_No_Debug\eBUSPlayer.exe|For monochrome models|No log output
-|20220629\eBUSPlayer.exe|For monochrome models|Output logs
-eBUSPlaye version: 6.2.4.5552<br>
-File path P:\Development\_Public\800_Users\nasu\eBUS Player lossless for Debug\
-
-
