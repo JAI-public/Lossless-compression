@@ -4,8 +4,6 @@
 
 ## Compression Specifications
 
-https://jaionline-my.sharepoint.com/:p:/g/personal/kta_jai_com/ERSBnMgd2_pMvAZE3PyqaJMB5P_Y6x-yFkrK4IQsC9mtNA
-
 ![image-20220427185854483](images/image-20220427185854483.png)
 
 ## Class Diagram
@@ -25,16 +23,6 @@ The decompression process is performed in parallel by threads. The decompression
 https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc5b719bd37911/src/compressed_buffer_bpp8.cpp#L19
 
 Thread pools are created as Singletons, so they are not generated for each frame.
-#### ~~GetBeforeCompressionHeight()~~
-
-~~圧縮前Heightを計算するメソッドである。圧縮された画像の場合カメラが生成するImageのHeightの値が小さくなってる。eBUS SDKのPvImageクラスで取得できるHeightは圧縮後のHeightである。~~
-
-~~本ライブラリでは伸長結果を展開するバッファを生成するため、圧縮前のHeightが必要である。本メソッドは圧縮データを解析し圧縮前Heightを算出する。~~
-
-~~なお、圧縮データ以上の場合無限ループに陥ることを防ぐため、Height数にLimitを設定してある。もし下記値を超える画像を扱う場合は、適切な値に変更必要である。~~
-
-~~https://github.com/jai-rd/lossless_compression/blob/f903efad71f7d45f33d5cb0706cc5b719bd37911/include/compressed_buffer_bpp8.hpp#L34~~
-
 
 
 #### DoDecompress()
