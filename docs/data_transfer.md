@@ -1,6 +1,6 @@
 # Data Transfer
 **Environment:** Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz, 32Gb, Windows10 Pro 21H2<br>
-**Camera:** 16205M-PGE<br>
+**Camera:** 16205C-PGE<br>
 **Device Version:** DV 5.1.0.0<br>
 **Image Size:** 5248x3040<br>
 **FPS:**  Approx. 2.9Hz<br>
