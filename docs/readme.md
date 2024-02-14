@@ -14,7 +14,6 @@ $build>cmake --build . --config Release
 ```
 
 When the build is complete, `liblossless.lib` is created in `build/bin/Release`.<br>
-~~You can build using the procedure above but the details of building with CMake are described here.~~
 
 ## Folder Structure
 
