@@ -9,7 +9,7 @@
   
 ### Date Measured: 2022/4/5
 ### Measurement Machine
-* CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
+* CPU: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
 * Memory: 32.0 GB
 
 
@@ -21,7 +21,7 @@
 |3  |161.732    |40.224   |24.763|25.166|17.110
 |3  |161.982    |44.759   |32.435|25.975|18.194
 
-Measured by looping DeCompress to get closer to the actual process since v0.0.3
+Since v0.0.3, DeCompress is looped to get closer to the actual processing.
   
   
 https://github.com/jai-rd/lossless_compression/releases/tag/v0.0.3  
@@ -33,7 +33,7 @@ https://github.com/jai-rd/lossless_compression/issues/21
   
 ### Date Measured: 2022/4/5
 ### Measurement Machine
-* CPU : AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
+* CPU: AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
 * Memory: 32.0 GB
 
 
@@ -45,7 +45,7 @@ https://github.com/jai-rd/lossless_compression/issues/21
 |3  |114.772    |35.849   |18.396|13.890|14.019
 |3  |114.440    |28.428   |21.030|14.253|15.653
 
-Measured by looping DeCompress to get closer to the actual process since v0.0.3
+Since v0.0.3, DeCompress is looped to get closer to the actual processing.
 </details>
 
 ### Implementation v0.0.2
@@ -54,8 +54,8 @@ Measured by looping DeCompress to get closer to the actual process since v0.0.3
   
 ### Date Measured: 2022/4/4
 ### Measurement Machine
-* CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
-* Memory : 32.0 GB
+* CPU: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
+* Memory: 32.0 GB
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
 |--|--|--|--|--|--|
@@ -73,8 +73,8 @@ https://github.com/jai-rd/lossless_compression/issues/17
   
 ### Date Measured: 2022/4/5
 ### Measurement Machine
-* CPU : AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
-* Memory : 32.0 GB
+* CPU: AMD Ryzen 7 5800X 8-Core Processor 3.80 GHz
+* Memory: 32.0 GB
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
 |--|--|--|--|--|--|
@@ -89,8 +89,8 @@ https://github.com/jai-rd/lossless_compression/issues/17
   
 ### Date Measured: 2022/4/4
 ### Measurement Machine
-* CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
-* Memory : 32.0 GB
+* CPU: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
+* Memory: 32.0 GB
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
 |--|--|--|--|--|--|
@@ -109,8 +109,8 @@ https://github.com/jai-rd/lossless_compression/issues/15
   
 ### Date Measured: 2022/4/4
 ### Measurement Machine
-* CPU : Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
-* Memory : 32.0 GB
+* CPU: Intel(R) Core(TM) i9-10900X CPU @ 3.70GHz   3.70 GHz
+* Memory: 32.0 GB
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16|ThreadNum=20
 |--|--|--|--|--|--|
@@ -118,7 +118,7 @@ https://github.com/jai-rd/lossless_compression/issues/15
 |2  |240.02    |130.94   |32.86|26.03|23.05
 |3  |238.63    |56.76   |32.49|24.86|23.75
   
-Measurement code is 2021/7/28 Equivalent 
+The measurement code is equivalent to 2021/7/28 
 </details>
 
 
@@ -127,8 +127,8 @@ Measurement code is 2021/7/28 Equivalent
 
 ### Date Measured: 2021/7/28 (Approx)
 ### Measurement Machine
-* CPU : Ryzen3700
-* Memory : 32GB
+* CPU: Ryzen3700
+* Memory: 32GB
 
 |   |ThreadNum=1   |ThreadNum=4 |ThreadNum=8|ThreadNum=16
 |--|--|--|--|--|
