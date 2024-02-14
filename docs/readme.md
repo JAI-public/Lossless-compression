@@ -1,9 +1,9 @@
-# 設計資料
-decompress libraryは他のjaidsライブラリへの依存はなく単独で動作する。Ver1.0.0時点ではstatic library版のみリリースしている。
+# Design Documents
+The decompress library does not depend on other jaids libraries and works independently. As of Ver1.0.0, only the static library version has been released.
 
 ## How to build
 
-本ツールはCMakeを利用してbuildを行う。
+This tool uses CMake to build.
 
 ```
 $git clone https://github.com/jai-rd/lossless_compression
@@ -13,10 +13,10 @@ $lossless_compression>cd build
 $build>cmake --build . --config Release
 ```
 
-buildが完了すると`build/bin/Release`以下に`liblossless.lib`が生成される。  
-上記手順でbuild可能であるが、[こちら](https://github.com/jai-rd/jaids-utils/blob/develop/docs/build.md#build手順)にCMakeを利用したbuild手順詳細を記載している。
+When the build is complete, `liblossless.lib` is created in `build/bin/Release`.<br>
+~~You can build using the procedure above but the details of building with CMake are described here.~~
 
-## folder構成
+## Folder Structure
 
 ```
 Mode                 LastWriteTime         Length Name
@@ -31,21 +31,21 @@ d-----        2022/04/05     19:29                test_app
 
 | folder   |                                |
 | -------- | ------------------------------ |
-| docs     | 設計ドキュメントを格納         |
-| include  | 公開ヘッダファイル             |
+| docs     | Design documents         |
+| include  | Public Header files           |
 | src      | src code                       |
-| test     | google testを利用したtest code |
-| test_app | 伸長画像をPvBufferへ展開する例 |
+| test     | test code using Google Test |
+| test_app | Example of decompressing a decompressed image into a PvBuffer  |
 
-## 利用しているOSS
+## OSS in Use
 
 | OSS name   | Version | Url                                    |
 | ---------- | ------- | -------------------------------------- |
 | ThreadPool |         | https://github.com/progschj/ThreadPool |
 
-* ThreadPoolはZlib Licenceであるため自由に使えアプリケーションへの表記も必須ではない
+* ThreadPool is a Zlib license, and it is free to use. It does not require any notation in the application.
 
-## モジュール設計
+## Modular Design
 
-​	[モジュール設計](design.md)
+​	[Module Configuration](design.md)
 
