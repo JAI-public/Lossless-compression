@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * test/xxx_test.cpp
+ * modules/src/threadpool_mgr.cpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -17,34 +17,17 @@
  * under the License.
  *
  ****************************************************************************/
-#include <gtest/gtest.h>
+#include "threadpool_mgr.hpp"
 
-#include <map>
-#include <string>
+#include "ThreadPool.h"
 
-
-
-
-// テストフィクスチャとTEST_Fマクロを使う場合
-
-class PixelTypeTest : public ::testing::Test {
-protected:
-    //std::unique_ptr<jaids::core::base::pv::CoreVersionImpl> corecersion;
-    // データメンバーの初期化
-    virtual void SetUp() { data1_ = 2.0; }
-    // データメンバー
-    double data1_;
-
-    //CoreVersionImplTest() { corecersion = std::make_unique<jaids::core::base::pv::CoreVersionImpl>(); }
-};
-
-
-TEST_F(PixelTypeTest, Mono8) {
-    EXPECT_EQ(2, 1+1);
-    //EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
-
-TEST_F(PixelTypeTest, Mono1) {
-    EXPECT_EQ(1, 1 + 1);
-    // EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
+namespace jaids::lossless {
+    ThreadPoolMgr& ThreadPoolMgr::GetInstance(const uint16_t thread_num) {
+        static ThreadPoolMgr instance(thread_num);
+        return instance;
+    }
+    ThreadPool& jaids::lossless::ThreadPoolMgr::GetPool() {
+        return *pool_;
+    }
+    ThreadPoolMgr::ThreadPoolMgr(const uint16_t thread_num) { pool_ = new ThreadPool(thread_num); }
+}  // namespace jaids::lossless

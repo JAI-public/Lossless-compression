@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * test/xxx_test.cpp
+ * modules/include/itwos_complement_bitwidth.hpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -17,34 +17,18 @@
  * under the License.
  *
  ****************************************************************************/
-#include <gtest/gtest.h>
+#pragma once
 
-#include <map>
-#include <string>
+#include <cstdint>
 
-
-
-
-// テストフィクスチャとTEST_Fマクロを使う場合
-
-class PixelTypeTest : public ::testing::Test {
-protected:
-    //std::unique_ptr<jaids::core::base::pv::CoreVersionImpl> corecersion;
-    // データメンバーの初期化
-    virtual void SetUp() { data1_ = 2.0; }
-    // データメンバー
-    double data1_;
-
-    //CoreVersionImplTest() { corecersion = std::make_unique<jaids::core::base::pv::CoreVersionImpl>(); }
-};
-
-
-TEST_F(PixelTypeTest, Mono8) {
-    EXPECT_EQ(2, 1+1);
-    //EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
-
-TEST_F(PixelTypeTest, Mono1) {
-    EXPECT_EQ(1, 1 + 1);
-    // EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
+namespace jaids {
+    namespace lossless {
+        /// <summary>
+        /// 2の補数表現bitstreamをint16に変換
+        /// </summary>
+        class ITwosComplementBitWidth {
+        public:
+            virtual int ToIntValue(const unsigned int bitstream_value) = 0;
+        };
+    }  // namespace lossless
+}  // namespace jaids

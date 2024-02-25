@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * include/threadpool_mgr.hpp
+ * modules/include/twos_complement_bitwidth6.hpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -19,27 +19,29 @@
  ****************************************************************************/
 #pragma once
 
-#include "ThreadPool.h"
+#include "itwos_complement_bitwidth.hpp"
 
 #include <cstdint>
 
 namespace jaids {
     namespace lossless {
-        class ThreadPoolMgr {
+        /// <summary>
+        /// 2の補数表現されたbitstream処理
+        /// </summary>
+        class TwosComplementBitWidth6 : public ITwosComplementBitWidth {
         public:
-            ThreadPoolMgr(const ThreadPoolMgr&) = delete;
-            ThreadPoolMgr& operator=(const ThreadPoolMgr&) = delete;
-            ThreadPoolMgr(ThreadPoolMgr&&) = delete;
-            ThreadPoolMgr& operator=(ThreadPoolMgr&&) = delete;
-
-            static ThreadPoolMgr& GetInstance(const uint16_t thread_num);
-            ThreadPool& GetPool();
-            ~ThreadPoolMgr() = default;
+            TwosComplementBitWidth6() = default;
+            int ToIntValue(const unsigned int bitstream_value) override;
 
         private:
-            ThreadPoolMgr() = delete;
-            ThreadPoolMgr(const uint16_t);
-            ThreadPool* pool_;
+            const int value_from_bitstreams[64] = { 0,   1,   2,   3,   4,   5,   6,   7,   8,   9,   10,  11,  12,
+                                                  13,  14,  15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,
+                                                  26,  27,  28,  29,  30,  31,  -32, -31, -30, -29, -28, -27, -26,
+                                                  -25, -24, -23, -22, -21, -20, -19, -18, -17, -16, -15, -14, -13,
+                                                  -12, -11, -10, -9,  -8,  -7,  -6,  -5,  -4,  -3,  -2,  -1 };
         };
     }  // namespace lossless
 }  // namespace jaids
+
+
+

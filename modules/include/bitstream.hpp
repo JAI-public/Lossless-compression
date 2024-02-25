@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * test/xxx_test.cpp
+ * modules/include/bitstream.hpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -17,34 +17,21 @@
  * under the License.
  *
  ****************************************************************************/
-#include <gtest/gtest.h>
+#pragma once
 
-#include <map>
-#include <string>
+#include <cstdint>
+#include <utility>
 
+namespace jaids {
+    namespace lossless {
+        class BitStream {
+        public:
+            BitStream() = default;
+            BitStream(uint8_t*);
+            uint8_t GetStreamValue(const uint32_t start_bit, const uint8_t bit_width);
 
-
-
-// テストフィクスチャとTEST_Fマクロを使う場合
-
-class PixelTypeTest : public ::testing::Test {
-protected:
-    //std::unique_ptr<jaids::core::base::pv::CoreVersionImpl> corecersion;
-    // データメンバーの初期化
-    virtual void SetUp() { data1_ = 2.0; }
-    // データメンバー
-    double data1_;
-
-    //CoreVersionImplTest() { corecersion = std::make_unique<jaids::core::base::pv::CoreVersionImpl>(); }
-};
-
-
-TEST_F(PixelTypeTest, Mono8) {
-    EXPECT_EQ(2, 1+1);
-    //EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
-
-TEST_F(PixelTypeTest, Mono1) {
-    EXPECT_EQ(1, 1 + 1);
-    // EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
+        protected:
+            uint8_t* pBinData_ = nullptr;
+        };
+    }  // namespace lossless
+}  // namespace jaids

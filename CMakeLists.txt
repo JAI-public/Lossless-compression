@@ -1,72 +1,38 @@
-﻿cmake_minimum_required(VERSION 3.14)
+﻿# ##############################################################################
+# CMakeLists.txt
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more contributor
+# license agreements.  See the NOTICE file distributed with this work for
+# additional information regarding copyright ownership.  The ASF licenses this
+# file to you under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License.  You may obtain a copy of
+# the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations under
+# the License.
+#
+# ##############################################################################
+cmake_minimum_required(VERSION 3.14)
 
-#project name と使用言語
-project(lossless VERSION 0.0.1 LANGUAGES CXX)
+project(lossless VERSION 1.0.0 LANGUAGES CXX)
 message("<<<<<<<<<build lossless version :${lossless_VERSION_MAJOR}.${lossless_VERSION_MINOR}.${lossless_VERSION_PATCH}>>>>>>>>>>")
 
-# Version
-# CMake の設定をソースコードに渡すための
-# ヘッダファイルの構成
-configure_file (
-  "${PROJECT_SOURCE_DIR}/JaidsConfig.h.in"
-  "${PROJECT_BINARY_DIR}/JaidsConfig.h"
-  )
-# インクルードファイルの探索パスにバイナリツリーを追加
-include_directories("${PROJECT_BINARY_DIR}")
-
-# enable_testing()
-include(CTest)
-
 
 ##################################################################################
-# VSビルド時にutf-8指定
+# Configure file encoding as UTF-8 for VisualStudio
 ##################################################################################
 if(MSVC)
-add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
-add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+  add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+  add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 endif()
 
-
-##################################################################################
-# 3rd-party OSS library
-##################################################################################
-include(FetchContent)
-#FetchContent_Declare(
-#  ThreadPool
-#  GIT_REPOSITORY        https://github.com/progschj/ThreadPool
-#)
-#FetchContent_MakeAvailable(ThreadPool)
-
-
-
-##################################################################################
-# Visual Studio Runtime Option
-##################################################################################
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-# https://stackoverflow.com/questions/12540970/how-to-make-gtest-build-mdd-instead-of-mtd-by-default-using-cmake
-#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-# 次の行を追加するとMinSizeRelとRelWithDebInfoの選択肢を生成することが抑制
-SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "limited configs" FORCE)
-
-##################################################################################
-# Optimization
-##################################################################################
-if(UNIX)
-set(CMAKE_CXX_FLAGS "-O3 -Wall")
+add_subdirectory(modules)
+if (${BUILD_TESTS})
+  add_subdirectory(test)
+  add_subdirectory(test_app)
 endif()
-
-add_definitions(-DINFO_PRINT)
-
-##################################################################################
-#sub-dir
-##################################################################################
-add_subdirectory(src)
-add_subdirectory(test)
-if(MSVC)
-add_subdirectory(test_app)
-endif()
-# add_subdirectory(3rd-party)
-
-
-

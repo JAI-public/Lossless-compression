@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * include/threadpool_mgr.hpp
+ * modules/include/compressed_block_bpp8.hpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -19,27 +19,32 @@
  ****************************************************************************/
 #pragma once
 
-#include "ThreadPool.h"
-
 #include <cstdint>
+#include <utility>
+
+#include "compressed_bitstream.hpp"
 
 namespace jaids {
     namespace lossless {
-        class ThreadPoolMgr {
+        class CompressedBlockBpp8 {
         public:
-            ThreadPoolMgr(const ThreadPoolMgr&) = delete;
-            ThreadPoolMgr& operator=(const ThreadPoolMgr&) = delete;
-            ThreadPoolMgr(ThreadPoolMgr&&) = delete;
-            ThreadPoolMgr& operator=(ThreadPoolMgr&&) = delete;
+            CompressedBlockBpp8(CompressedBitStream&, uint8_t* dest_buffer, const uint32_t process_start_bits,
+                                 const uint32_t pixelnum_in_block);
+            virtual ~CompressedBlockBpp8();
+            virtual bool Decompress();
 
-            static ThreadPoolMgr& GetInstance(const uint16_t thread_num);
-            ThreadPool& GetPool();
-            ~ThreadPoolMgr() = default;
+        protected:
+            bool ParseBlockHeader();
+#ifdef _DEBUG
+            virtual void LogParseBlockHeader(const uint32_t block_start_bits, const uint8_t quantized_bitwidth);
+#endif  // _DEBUG
+            // get from lineheader
+            uint8_t quantized_bitwidth_ = 0;
 
-        private:
-            ThreadPoolMgr() = delete;
-            ThreadPoolMgr(const uint16_t);
-            ThreadPool* pool_;
+            CompressedBitStream& cbit_stream_;
+            uint32_t block_start_bits_;
+            uint32_t pixelnum_in_block_;
+            uint8_t* dest_buffer_ = nullptr;
         };
     }  // namespace lossless
 }  // namespace jaids

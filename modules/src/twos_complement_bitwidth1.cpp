@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * test/xxx_test.cpp
+ * modules/src/twos_complement_bitwidth1.cpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -17,34 +17,18 @@
  * under the License.
  *
  ****************************************************************************/
-#include <gtest/gtest.h>
+#include "twos_complement_bitwidth1.hpp"
 
-#include <map>
-#include <string>
+#include <cassert>
+#include <cmath>
 
-
-
-
-// テストフィクスチャとTEST_Fマクロを使う場合
-
-class PixelTypeTest : public ::testing::Test {
-protected:
-    //std::unique_ptr<jaids::core::base::pv::CoreVersionImpl> corecersion;
-    // データメンバーの初期化
-    virtual void SetUp() { data1_ = 2.0; }
-    // データメンバー
-    double data1_;
-
-    //CoreVersionImplTest() { corecersion = std::make_unique<jaids::core::base::pv::CoreVersionImpl>(); }
-};
-
-
-TEST_F(PixelTypeTest, Mono8) {
-    EXPECT_EQ(2, 1+1);
-    //EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
-
-TEST_F(PixelTypeTest, Mono1) {
-    EXPECT_EQ(1, 1 + 1);
-    // EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
+using namespace std;
+namespace jaids::lossless {
+    int TwosComplementBitWidth1::ToIntValue(const unsigned int bitstream_value) {
+        assert(bitstream_value < pow(2, 1));
+        // 2の補数変換
+        // 2bit 2の補数表現では
+        // 00->0, 01->1, 10->-2, 11->-1となるので以下配列で変換する。他のBitも同じ
+        return value_from_bitstreams[bitstream_value];
+    }
+}  // namespace jaids::lossless

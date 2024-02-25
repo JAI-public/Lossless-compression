@@ -9,8 +9,9 @@ This tool uses CMake to build.
 $git clone https://github.com/jai-rd/lossless_compression
 $cd lossless_compression
 $lossless_compression>mkdir build
+$build>cmake -S . -B build -D BUILD_SHARED_LIBS=ON
 $lossless_compression>cd build
-$build>cmake --build . --config Release
+$lossless_compression>make
 ```
 
 When the build is complete, `liblossless.lib` is created in `build/bin/Release`.<br>

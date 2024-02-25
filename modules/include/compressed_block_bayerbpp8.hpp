@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
- * test/xxx_test.cpp
+ * modules/include/compressed_block_bayerbpp8.hpp
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -17,34 +17,21 @@
  * under the License.
  *
  ****************************************************************************/
-#include <gtest/gtest.h>
+#pragma once
 
-#include <map>
-#include <string>
+#include <cstdint>
+#include <utility>
 
+#include "compressed_block_bpp8.hpp"
 
-
-
-// テストフィクスチャとTEST_Fマクロを使う場合
-
-class PixelTypeTest : public ::testing::Test {
-protected:
-    //std::unique_ptr<jaids::core::base::pv::CoreVersionImpl> corecersion;
-    // データメンバーの初期化
-    virtual void SetUp() { data1_ = 2.0; }
-    // データメンバー
-    double data1_;
-
-    //CoreVersionImplTest() { corecersion = std::make_unique<jaids::core::base::pv::CoreVersionImpl>(); }
-};
-
-
-TEST_F(PixelTypeTest, Mono8) {
-    EXPECT_EQ(2, 1+1);
-    //EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
-
-TEST_F(PixelTypeTest, Mono1) {
-    EXPECT_EQ(1, 1 + 1);
-    // EXPECT_EQ(PvPixelMono8, pixel_type.ToPvPixelType());
-}
+namespace jaids {
+    namespace lossless {
+        class CompressedBlockBayerBpp8 : public CompressedBlockBpp8 {
+        public:
+            CompressedBlockBayerBpp8(CompressedBitStream&, uint8_t* dest_buffer, const uint32_t process_start_bits,
+                                      const uint32_t pixelnum_in_block);
+//  20220803 changed for get initial value 0x0 or 0xff
+            bool Decompress(uint8_t value1, uint8_t value2, uint32_t block_num);
+        };
+    }  // namespace lossless
+}  // namespace jaids
