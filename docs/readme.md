@@ -8,13 +8,15 @@ This tool uses CMake to build.
 ```
 $git clone https://github.com/jai-rd/lossless_compression
 $cd lossless_compression
-$lossless_compression>mkdir build
 $build>cmake -S . -B build -D BUILD_SHARED_LIBS=ON
 $lossless_compression>cd build
-$lossless_compression>make
 ```
-
-When the build is complete, `liblossless.lib` is created in `build/bin/Release`.<br>
+After that, you should build correspond to your environment.
+## Windows Environment
+You can find lossless.sln in the build folder and open "lossless.sln" from VisualStudio and build libloessless.
+After build procedure, you can find library files in the build\modules folder.
+## Linux Environment
+You execute make in the build directory. After building, you can find libliblossless.so in the build/modules directory.
 
 ## Folder Structure
 
