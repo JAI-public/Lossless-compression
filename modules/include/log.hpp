@@ -22,6 +22,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 namespace jaids {
     namespace lossless {

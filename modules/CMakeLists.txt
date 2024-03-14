@@ -66,8 +66,8 @@ if(MSVC)
     target_link_directories(${TARGET_NAME} PUBLIC $ENV{PUREGEV_ROOT}/Libraries)
     target_include_directories(${TARGET_NAME} PRIVATE $ENV{PUREGEV_ROOT}/Includes)
 elseif(UNIX)
-    target_link_directories(${TARGET_NAME} PUBLIC $ENV{PUREGEV_ROOT}/lib)
-    target_include_directories(${TARGET_NAME} PRIVATE $ENV{PUREGEV_ROOT}/include)
+    target_link_directories(${TARGET_NAME} PUBLIC $ENV{PUREGEV_ROOT}/lib /opt/jai/ebus_sdk/Ubuntu-22.04-x86_64/lib)
+    target_include_directories(${TARGET_NAME} PRIVATE $ENV{PUREGEV_ROOT}/include /opt/jai/ebus_sdk/Ubuntu-22.04-x86_64/include)
     target_link_libraries(
         ${TARGET_NAME}
         PvBase
